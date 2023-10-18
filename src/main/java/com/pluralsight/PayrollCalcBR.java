@@ -1,13 +1,21 @@
 package com.pluralsight;
 import java.io.*;
+import java.util.*;
 public class PayrollCalcBR {
     public static void main(String[] args) {
+        Scanner fileNameScanner = new Scanner(System.in);
+                System.out.println("What file do you want to read?");
+                String fileNameScanner =
+                System.out.println("What file do you want to create?");
                 try
                 {
 // create a FileReader object connected to the File
                     FileReader fileReader = new FileReader("src/main/resources/employees.csv");
 // create a BufferedReader to manage input stream
                     BufferedReader employeeReader = new BufferedReader(fileReader);
+                    FileWriter fileWriter = new FileWriter("src/main/resources/payroll.csv");
+                    BufferedWriter bufWriter = new BufferedWriter(fileWriter);
+
                     String input;
 // read until there is no more data
                     while((input = employeeReader.readLine()) != null) {
@@ -17,10 +25,11 @@ public class PayrollCalcBR {
                         double employeeHours = Double.parseDouble(employeeInfo[2]);
                         double employeeWage = Double.parseDouble(employeeInfo[3]);
                         Employee employee = new Employee(employeeID, employeeName, employeeHours, employeeWage);
-                        System.out.printf(employee.getEmployeeId() +" " + employee.getName() + " " + employee.getGrossPay() + " " +  "\n" + "\n");
+                        bufWriter.write (employee.getEmployeeId() + "|"+ employee.getName() + "|" + employee.getGrossPay() + "\n");
                     }
 // close the stream and release the resources
                     employeeReader.close();
+                    bufWriter.close();
                 }
                 catch(IOException e) {
 // display stack trace if there was an error
