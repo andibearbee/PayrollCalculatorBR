@@ -4,16 +4,17 @@ import java.util.*;
 public class PayrollCalcBR {
     public static void main(String[] args) {
         Scanner fileNameScanner = new Scanner(System.in);
-                System.out.println("What file do you want to read?");
-                String fileNameScanner =
-                System.out.println("What file do you want to create?");
+                System.out.println("What is the name of the file you want to read/process?");
+                String currentFileName = fileNameScanner.next();
+                System.out.println("What file do you want to create please include a .csv extension?");
+                String newFileName = fileNameScanner.next();
                 try
                 {
 // create a FileReader object connected to the File
-                    FileReader fileReader = new FileReader("src/main/resources/employees.csv");
+                    FileReader fileReader = new FileReader("src/main/resources/" + currentFileName);
 // create a BufferedReader to manage input stream
                     BufferedReader employeeReader = new BufferedReader(fileReader);
-                    FileWriter fileWriter = new FileWriter("src/main/resources/payroll.csv");
+                    FileWriter fileWriter = new FileWriter("src/main/resources/" + newFileName);
                     BufferedWriter bufWriter = new BufferedWriter(fileWriter);
 
                     String input;
